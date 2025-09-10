@@ -1,0 +1,5 @@
+.env
+.DS_Store
+/backend/node_modules/
+notes.md
+

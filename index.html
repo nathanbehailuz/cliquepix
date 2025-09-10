@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CliquePix</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    nav {
+      background-color: #007bff;
+      padding: 10px 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffdd57;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin: 50px 0 10px;
+      color: #007bff;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.2em;
+      margin: 10px 0 30px;
+      color: #555;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1em;
+      color: white;
+      background: linear-gradient(90deg, #007bff, #0056b3);
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #0056b3, #007bff);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/main-page">Home</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </nav>
+
+  <h1>CliquePix</h1>
+  <p>A private photo and video sharing platform for close friends</p>
+
+  <div class="btn-container">
+    <a href="/login" class="btn">Login</a>
+    <a href="/register" class="btn">Register</a>
+  </div>
+</body>
+</html>

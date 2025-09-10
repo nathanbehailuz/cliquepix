@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="css/main-page.css">
+
+<title>Add Friend</title>
+<style>
+.add-friend-form {
+    margin-left: 500px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin-top: 100px;
+}
+
+.add-friend-form h2 {
+    font-family: Arial, sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.add-friend-form .form-group {
+    margin-bottom: 15px;
+}
+
+.add-friend-form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.add-friend-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.add-friend-form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.add-friend-form button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-friend-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Message styling */
+.add-friend-form p {
+    font-size: 0.9rem;
+    color: #007bff;
+    text-align: center;
+    margin-top: 15px;
+}
+</style>
+
+
+<div class="add-friend-form">
+  <h2>Add a Friend</h2>
+  <form action="/add-friend" method="post">
+    <div class="form-group">
+      <label for="name">Friend's Name:</label>
+      <input type="text" name="name" id="name" required>
+    </div>
+    <div class="form-group">
+      <label for="fID">Friend's ID:</label>
+      <input type="text" name="fID" id="fID" value="{{userFId}}" required>
+    </div>
+    <button type="submit">Add Friend</button>
+  </form>
+  {{#if msg}}
+    <p>{{msg}}</p>
+  {{/if}}
+</div>

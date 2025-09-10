@@ -1,0 +1,181 @@
+<link rel="stylesheet" href="css/main-page.css">
+  <style>
+    /* Main profile container */
+    .profile-container {
+      margin-left: 400px; 
+      margin-top: 20px;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      object-fit: cover;
+    }
+
+    .profile-info p {
+      margin: 5px 0;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .profile-info #fkey {
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Buttons under profile */
+    .profile-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .profile-buttons button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .profile-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+     /* Add these styles for the edit-share button */
+    .edit-share {
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .edit-share:hover {
+      background-color: #0056b3;
+    }
+
+    /* Media container grid */
+    .media-container {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .media-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .media-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .media-item p {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .media-item p:first-of-type {
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Add styles for the share dialog */
+    .share-dialog {
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .friends-list {
+      margin: 15px 0;
+    }
+
+    .friend-item {
+      margin: 8px 0;
+    }
+
+    .dialog-buttons {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Overall page styling */
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+
+
+<div class="profile-container">
+  <div class="profile-info">
+    <img class="profile-pic" src="{{user.profile_pic}}" alt="Profile Picture">
+    <div>
+      <p><strong>{{user.username}}</strong></p>
+      <p>{{user.email}}</p>
+      <p>
+        <span id="fkey">{{user.f_key}}</span>
+        <button onclick="toggleFkey()" style="background: none; border: none; color: #007bff; cursor: pointer;">Show/Hide</button>
+      </p>
+      <p>{{user.friends.length}} friends</p>
+    </div>
+  </div>
+
+  <div class="profile-buttons">
+    <button class = 'edit-friends-list'> Edit Friends List</button>
+    <button class = 'change-f-key'> Change F-key</button>
+  </div>
+
+  <h2 style="margin-top: 30px; color: #333;">My Media</h2>
+
+   <div class="media-container">
+    {{#if media.length}}
+    {{#each media as |m|}}
+      <div class="media-item">
+        <img class="media-image" id="{{m._id}}" src="{{m.url}}" alt="Media item">
+        <button class="edit-share">Edit Share</button>
+      </div>
+    {{/each}}
+    {{else}}
+    <p style="color: #999;">No media uploaded yet. Upload some media to get started!</p>
+    {{/if}}
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script  type="module" src="/js/manage-media.js"></script>
+
+
