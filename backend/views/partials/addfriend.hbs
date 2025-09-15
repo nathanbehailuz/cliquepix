@@ -1,93 +1,139 @@
-<link rel="stylesheet" href="css/main-page.css">
-
-<title>Add Friend</title>
-<style>
-.add-friend-form {
-    margin-left: 500px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin-top: 100px;
-}
-
-.add-friend-form h2 {
-    font-family: Arial, sans-serif;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.add-friend-form .form-group {
-    margin-bottom: 15px;
-}
-
-.add-friend-form label {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #555;
-    font-weight: bold;
-}
-
-.add-friend-form input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    outline: none;
-}
-
-.add-friend-form input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-.add-friend-form button {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-friend-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Message styling */
-.add-friend-form p {
-    font-size: 0.9rem;
-    color: #007bff;
-    text-align: center;
-    margin-top: 15px;
-}
-</style>
-
-
-<div class="add-friend-form">
-  <h2>Add a Friend</h2>
-  <form action="/add-friend" method="post">
-    <div class="form-group">
-      <label for="name">Friend's Name:</label>
-      <input type="text" name="name" id="name" required>
+<div class="max-w-md mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Add a Friend</h1>
+        <p class="text-gray-600">Connect with your friends using their unique friend key</p>
     </div>
-    <div class="form-group">
-      <label for="fID">Friend's ID:</label>
-      <input type="text" name="fID" id="fID" value="{{userFId}}" required>
+    
+    <!-- Add Friend Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <form action="/add-friend" method="post" class="space-y-6">
+            <!-- Friend Name Input -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Friend's Display Name
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <input type="text" name="name" id="name" required 
+                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-400"
+                           placeholder="Enter your friend's name">
+                </div>
+                <p class="mt-1 text-xs text-gray-500">This is how you'll see them in your friends list</p>
+            </div>
+            
+            <!-- Friend ID Input -->
+            <div>
+                <label for="fID" class="block text-sm font-medium text-gray-700 mb-2">
+                    Friend's Unique Key
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                        </svg>
+                    </div>
+                    <input type="text" name="fID" id="fID" value="{{userFId}}" required 
+                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-400 font-mono"
+                           placeholder="Enter friend's unique key">
+                </div>
+                <p class="mt-1 text-xs text-gray-500">Ask your friend for their unique friend key</p>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                </svg>
+                Add Friend
+            </button>
+        </form>
+        
+        <!-- Success/Error Message -->
+        {{#if msg}}
+            <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p class="text-green-800 font-medium">{{msg}}</p>
+                </div>
+            </div>
+        {{/if}}
     </div>
-    <button type="submit">Add Friend</button>
-  </form>
-  {{#if msg}}
-    <p>{{msg}}</p>
-  {{/if}}
+    
+    <!-- How It Works Section -->
+    <div class="mt-8 bg-blue-50 rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-blue-800 mb-3">How to Add Friends</h3>
+        <div class="space-y-3 text-sm text-blue-700">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span class="text-blue-800 font-semibold text-xs">1</span>
+                </div>
+                <p>Ask your friend to share their unique friend key from their profile page</p>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span class="text-blue-800 font-semibold text-xs">2</span>
+                </div>
+                <p>Enter their display name and friend key in the form above</p>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 bg-blue-200 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                    <span class="text-blue-800 font-semibold text-xs">3</span>
+                </div>
+                <p>Click "Add Friend" and you'll be connected!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Share Your Key Section -->
+    <div class="mt-6 bg-gray-50 rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-3">Share Your Friend Key</h3>
+        <p class="text-sm text-gray-600 mb-4">Let others add you as a friend by sharing your unique key:</p>
+        <div class="flex items-center space-x-3">
+            <div class="flex-1 bg-white border border-gray-300 rounded-lg px-4 py-3">
+                <code class="text-sm font-mono text-gray-800" id="shareKey">{{userFId}}</code>
+            </div>
+            <button onclick="copyToClipboard()" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition duration-150 ease-in-out">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+    </div>
 </div>
+
+<script>
+function copyToClipboard() {
+    const keyElement = document.getElementById('shareKey');
+    const key = keyElement.textContent;
+    
+    navigator.clipboard.writeText(key).then(() => {
+        // Show success feedback
+        const button = event.target.closest('button');
+        const originalText = button.innerHTML;
+        button.innerHTML = `
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            Copied!
+        `;
+        button.classList.add('bg-green-600', 'hover:bg-green-700');
+        button.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>

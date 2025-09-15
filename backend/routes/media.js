@@ -83,7 +83,8 @@ router.post('/search-images/:names', async (req, res) =>{
       layout: 'layout', 
       partial: 'home', 
       media: matchedImages,
-      friends: friends
+      friends: friends,
+      user: user
     });
     
   } catch (err){
@@ -164,7 +165,8 @@ router.get('/main-page', async (req, res) => {
       layout: 'layout', 
       partial: 'home', 
       media: formattedMedia,
-      friends: friends
+      friends: friends,
+      user: user
     });
 
   } catch (error) {
@@ -174,7 +176,8 @@ router.get('/main-page', async (req, res) => {
 });
 
 router.get('/create', async (req, res) => {
-  res.render('main-page', {layout: 'layout', partial: 'create'});
+  const user = await User.findById(req.session.userId);
+  res.render('main-page', {layout: 'layout', partial: 'create', user: user});
 });
 
 router.post('/create', upload.single('file'), async (req, res) => {
@@ -217,7 +220,7 @@ router.post('/create', upload.single('file'), async (req, res) => {
     console.log('Media uploaded:', media.url);
     console.log('User media:', user.media);
     
-    res.render('main-page', {layout: 'layout', partial: 'create', msg: "File uploaded successfully"});
+    res.render('main-page', {layout: 'layout', partial: 'create', msg: "File uploaded successfully", user: user});
 
   } catch (error) {
     console.error('Upload error:', error);
@@ -225,8 +228,9 @@ router.post('/create', upload.single('file'), async (req, res) => {
   }
 });
 
-router.get('/add-friend', (req, res) => {
-  res.render('main-page', {layout: 'layout', partial: 'addfriend'});
+router.get('/add-friend', async (req, res) => {
+  const user = await User.findById(req.session.userId);
+  res.render('main-page', {layout: 'layout', partial: 'addfriend', user: user});
 });
 
 router.post('/add-friend', async (req, res) => {
@@ -255,17 +259,28 @@ router.post('/add-friend', async (req, res) => {
   await user.save();
   await friend.save();
 
-  res.render('main-page', {layout: 'layout', partial: 'addfriend', msg: "Friend added"});
+  res.render('main-page', {layout: 'layout', partial: 'addfriend', msg: "Friend added", user: user});
 
 });
 
 router.get('/profile', async (req, res) => {
+  if (!req.session.userId) {
+    return res.redirect('/login');
+  }
+
   const user = await User.findById(req.session.userId);
+  if (!user) {
+    return res.redirect('/login');
+  }
 
   const mediaList = [];
-  for(const mediaId of user.media) {
-    const populatedMedia = await Media.findById(mediaId);
-    mediaList.push(populatedMedia);
+  if (user.media && user.media.length > 0) {
+    for(const mediaId of user.media) {
+      const populatedMedia = await Media.findById(mediaId);
+      if (populatedMedia) {
+        mediaList.push(populatedMedia);
+      }
+    }
   }
 
   mediaList.reverse();
