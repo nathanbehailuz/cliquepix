@@ -35,7 +35,7 @@
                 </div>
                 
                 <!-- Hidden File Input -->
-                <input type="file" id="fileUpload" name="file" accept="image/*,video/*" class="hidden" multiple>
+                <input type="file" id="fileUpload" name="file" accept="image/jpeg,image/png,image/gif,image/webp,.jpg,.jpeg,.png,.gif,.webp" class="hidden">
             </div>
             
             <!-- File Preview Area -->
@@ -64,6 +64,11 @@
                     </svg>
                     <p class="text-green-800 font-medium">{{msg}}</p>
                 </div>
+            </div>
+        {{/if}}
+        {{#if error}}
+            <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p class="text-red-800 font-medium">{{error}}</p>
             </div>
         {{/if}}
     </div>

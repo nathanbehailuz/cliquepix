@@ -7,12 +7,18 @@
   "scripts": {
     "start": "node app.mjs",
     "dev": "nodemon app.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test backend/lib/access.test.mjs",
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@tensorflow/tfjs-node": "^4.22.0",
+    "@vercel/blob": "^2.8.2",
     "bcrypt": "^5.1.1",
     "canvas": "^2.11.2",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-session": "^1.18.1",

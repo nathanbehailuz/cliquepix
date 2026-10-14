@@ -11,7 +11,12 @@ export function config() {
   const missingVars = requiredVars.filter(varName => !process.env[varName]);
   
   if (missingVars.length > 0) {
-    console.error(`Missing required environment variables: ${missingVars.join(', ')}`);
+    const message = `Missing required environment variables: ${missingVars.join(', ')}`;
+    if (process.env.VERCEL) {
+      console.warn(message);
+      return;
+    }
+    console.error(message);
     process.exit(1);
   }
 }

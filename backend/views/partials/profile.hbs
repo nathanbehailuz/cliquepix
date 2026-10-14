@@ -220,11 +220,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userFID: '{{user.f_key}}' })
+                body: JSON.stringify({})
             });
             
             const friendsData = await friendsResponse.json();
-            currentFriends = Object.entries(friendsData.friends).map(([id, name]) => ({ id, name }));
+            currentFriends = Array.isArray(friendsData.friends)
+                ? friendsData.friends.map((friend) => ({ id: friend.friendId, name: friend.name }))
+                : [];
             
             // Get current access list for this media
             const accessResponse = await fetch('/api/getNames', {
@@ -236,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             const accessData = await accessResponse.json();
-            currentAccessList = accessData.friends || [];
+            currentAccessList = (accessData.accessList || []).map(String);
             
             // Render friends list
             renderFriendsList();
@@ -251,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
         friendsList.innerHTML = '';
         
         currentFriends.forEach(friend => {
-            const isSelected = currentAccessList.includes(friend.name);
+            const isSelected = currentAccessList.includes(String(friend.id));
             
             const friendItem = document.createElement('div');
             friendItem.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
@@ -274,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const toggleSwitch = document.createElement('button');
             toggleSwitch.className = `relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${isSelected ? 'bg-indigo-600' : 'bg-gray-200'}`;
-            toggleSwitch.setAttribute('data-friend-name', friend.name);
+            toggleSwitch.setAttribute('data-friend-id', friend.id);
             toggleSwitch.setAttribute('data-selected', isSelected);
             
             const toggleCircle = document.createElement('span');
@@ -313,23 +315,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Save access changes
     saveAccess.addEventListener('click', async function() {
-        const toggleButtons = friendsList.querySelectorAll('button[data-friend-name]');
+        const toggleButtons = friendsList.querySelectorAll('button[data-friend-id]');
         const selectedFriends = [];
-        const unselectedFriends = [];
         
         toggleButtons.forEach(button => {
-            const friendName = button.getAttribute('data-friend-name');
+            const friendId = button.getAttribute('data-friend-id');
             const isSelected = button.getAttribute('data-selected') === 'true';
             
             if (isSelected) {
-                selectedFriends.push(friendName);
-            } else {
-                unselectedFriends.push(friendName);
+                selectedFriends.push(friendId);
             }
         });
         
         console.log('Selected friends:', selectedFriends);
-        console.log('Unselected friends:', unselectedFriends);
         
         try {
             const response = await fetch('/api/shareImage', {
@@ -339,8 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({
                     imageId: currentMediaId,
-                    friends: selectedFriends,
-                    unselectedFriends: unselectedFriends
+                    friends: selectedFriends
                 })
             });
             

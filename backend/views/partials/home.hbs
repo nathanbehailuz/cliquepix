@@ -7,10 +7,14 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-gray-800">Your Feed</h2>
                     <div class="flex items-center space-x-4">
+                        <form action="/search-images" method="post" class="flex items-center space-x-2">
+                            <input type="text" name="names" class="ai-image-search bg-gray-50 border border-gray-300 text-gray-700 py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Search by friend name">
+                            <button type="submit" class="ai-image-search-btn bg-indigo-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-indigo-700 transition duration-150 ease-in-out">Search</button>
+                        </form>
                         <select class="filter-dropdown bg-gray-50 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                            <option value="all">All Posts</option>
-                            <option value="mine">My Posts</option>
-                            <option value="friends">Friends' Posts</option>
+                            <option value="all" {{#if (eq filterBy 'all')}}selected{{/if}}>All Posts</option>
+                            <option value="mine" {{#if (eq filterBy 'mine')}}selected{{/if}}>My Posts</option>
+                            <option value="friends" {{#if (eq filterBy 'friends')}}selected{{/if}}>Friends' Posts</option>
                         </select>
                     </div>
                 </div>

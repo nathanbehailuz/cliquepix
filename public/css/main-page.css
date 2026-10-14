@@ -1,0 +1,178 @@
+body{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-container, .main-container, .friends-container {
+    height: 100vh;
+}
+
+.navbar-container, .friends-container {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.friends-container {
+    text-align: center;
+}
+
+.navbar-container {
+    display: flex;
+    margin-left: 10px;
+    flex: 1;
+    flex-direction: column;    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.navbar-container a {
+    margin: 10px;
+    margin-left: 0;
+}
+.navbar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.navbar-link:hover {
+    background-color: #f0f0f0;
+}
+
+.navbar-link svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.navbar-container, .friends-container, .main-container{
+    padding: 16px;
+}
+
+.main-container {
+    flex: 2;
+    text-align: center;
+    margin-left: 400px;
+    padding: 20px;
+} 
+
+.friends-container {
+    flex: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.search-filter-container {
+    display: flex;
+    margin: 16px 0 16px 0;
+    text-align: left;
+}
+
+.search-container {
+    flex: 1;
+}
+
+.filter-dropdown {
+    min-width: 120px;
+}
+
+.media-card-header {
+    display: flex;
+    /* align-items: center; */
+    border: 1px solid grey;
+    /* margin-right: 80px; */
+}
+
+.media-card-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.medias-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.more-options {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: auto;
+}
+  
+.dots {
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+.media-card-body img {
+    width: 500px;
+    aspect-ratio: 1/1; 
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.media-card-footer {
+    /* margin: 0 80px 10px 80px; */
+    padding-top: 10px;
+    border: 1px solid grey;
+    text-align: left;
+}
+
+.media-card-header{
+    /* margin-left: 80px; */
+    margin-top: 10px;
+}
+
+.friends-container {
+    text-align: left;
+    margin-right: 15px;
+}
+
+.friend-card{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.friend-card img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.friends-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friends-header a {
+    text-decoration: none;
+    color: #333;
+}
