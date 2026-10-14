@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import express from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import multer from 'multer';
 import '../db/db.mjs';
 import { createImageUpload, storedUrlFor, safeUploadFilename } from '../lib/uploads.mjs';

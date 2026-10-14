@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --omit=optional",
   "functions": {
     "app.mjs": {
       "maxDuration": 60,

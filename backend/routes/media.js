@@ -101,7 +101,20 @@ router.post('/search-images', auth, async (req, res) => {
       }
     }
 
-    const { filterImagesByName } = await import('./fr-scripts.js');
+    let filterImagesByName;
+    try {
+      ({ filterImagesByName } = await import('./fr-scripts.js'));
+    } catch (err) {
+      console.error('Face search is unavailable:', err);
+      return res.render('main-page', {
+        layout: 'layout',
+        partial: 'home',
+        media: [],
+        friends: await friendsForSidebar(user),
+        user,
+        filterBy: 'all'
+      });
+    }
     const matchedImages = await filterImagesByName(allMedia, profileImages);
     const formattedMedia = formatMedia(
       await Media.populate(matchedImages, { path: 'owner', select: 'username profile_pic' })
